@@ -1,8 +1,10 @@
 const express = require('express')
+const cors = require('cors')
 const db = require('./db.js')
 const router = express.Router()
 
 router.use(express.json())
+router.use(cors())
 
 router.get('/', async (req, res) => {
     try {
@@ -54,7 +56,6 @@ router.delete('/:id', async (req, res) => {
 })
 
 router.put('/:id', async (req, res) => {
-    
     try {
         const { title, contents } = req.body
         if (title && contents) {
@@ -71,7 +72,5 @@ router.put('/:id', async (req, res) => {
         res.status(500).json({ error: "The post information could not be modified." })
     }
 })
-
-
 
 module.exports = router
